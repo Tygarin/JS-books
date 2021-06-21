@@ -1,0 +1,52 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+header {
+  padding-top: 50px;
+}
+header .container {
+  display: flex;
+  justify-content: space-between;
+}
+header .container a {
+  text-decoration: none;
+  color: black;
+}
+.content {
+  margin-top: 100px;
+}
+.content .addBook {
+  display: flex;
+  flex-direction: column;
+  max-width: 200px;
+  margin: 0 auto;
+}
+.content .addBook .name {
+  margin-top: 10px;
+}
+.content .addBook .text {
+  margin-top: 10px;
+  padding-bottom: 100px;
+}
+.content .addBook .write,
+.content .addBook .upload {
+  cursor: pointer;
+}
+.content .addBook .writeBtn,
+.content .addBook .uploadBtn {
+  width: 80%;
+  margin-top: 10px;
+  height: 30px;
+  cursor: pointer;
+}
+.content .addBook .uploadTxt {
+  margin-top: 10px;
+}
+.content .innerUpload {
+  display: none;
+}
