@@ -2,51 +2,52 @@
   padding: 0;
   margin: 0;
 }
-.container {
-  max-width: 1000px;
-  margin: 0 auto;
-}
-header {
-  padding-top: 50px;
-}
-header .container {
+.wrapper {
   display: flex;
-  justify-content: space-between;
+  padding: 10px;
 }
-header .container a {
-  text-decoration: none;
-  color: black;
+li {
+  list-style: none;
 }
-.content {
-  margin-top: 100px;
+.left {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
 }
-.content .addBook {
+.left p {
+  background: #585858;
+  color: #ffffff;
+}
+.left .addBook {
   display: flex;
   flex-direction: column;
   max-width: 200px;
   margin: 0 auto;
 }
-.content .addBook .name {
+.left .addBook .name {
   margin-top: 10px;
 }
-.content .addBook .text {
+.left .addBook .text {
   margin-top: 10px;
   padding-bottom: 100px;
 }
-.content .addBook .write,
-.content .addBook .upload {
+.left .addBook .write,
+.left .addBook .upload {
   cursor: pointer;
 }
-.content .addBook .writeBtn,
-.content .addBook .uploadBtn {
-  width: 80%;
+.left .addBook .writeBtn,
+.left .addBook .uploadBtn {
+  width: 173px;
   margin-top: 10px;
   height: 30px;
   cursor: pointer;
 }
-.content .addBook .uploadTxt {
+.left .addBook .uploadTxt {
   margin-top: 10px;
 }
-.content .innerUpload {
+.left .innerUpload {
   display: none;
+}
+.right {
+  width: 100%;
 }

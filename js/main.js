@@ -19,8 +19,28 @@ upload_btn.addEventListener('click', ()=>{
 
 const uploadFormBtn = document.getElementById('uploadFormBtn');
 const writeFormBtn = document.getElementById('writeFormBtn');
+const booklist = document.getElementById('booklist');
 const uploadForm = document.forms.uploadForm;
 const writeForm = document.forms.writeForm;
+
+if(localStorage.getItem("books").length > 0) {
+    for (i = 0; i < JSON.parse(localStorage.getItem("books")).length; i++) {
+        let li = document.createElement("li");
+        li.classList.add('li');
+        li.innerHTML = JSON.parse(localStorage.getItem("books"))[i].login;
+        booklist.appendChild(li);
+    }
+}
+
+class Book {
+    constructor() {
+        let li = document.createElement("li");
+        li.classList.add('li');
+        console.log(JSON.parse(localStorage.getItem("books"))[JSON.parse(localStorage.getItem("books")).length - 1].login);
+        li.innerHTML = JSON.parse(localStorage.getItem("books"))[JSON.parse(localStorage.getItem("books")).length - 1].login;
+        booklist.appendChild(li);
+    }
+}
 
 if(localStorage.getItem('books')) {
     books = JSON.parse(localStorage.getItem('books'));
@@ -38,6 +58,9 @@ uploadFormBtn.addEventListener('click', function() {
         })
         localStorage.setItem('books', JSON.stringify(books));
     }
+    setTimeout(()=> {
+        let Books = new Book;
+    }, 50)
 })
 writeFormBtn.addEventListener('click', function() {
     books.push({
@@ -46,5 +69,5 @@ writeFormBtn.addEventListener('click', function() {
     })
     console.log(document.getElementById('writeInputLogin').value);
     localStorage.setItem('books', JSON.stringify(books));
+    let Books = new Book;
 })
-

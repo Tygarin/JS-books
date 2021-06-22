@@ -3,29 +3,26 @@
     margin: 0;
 }
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
+.wrapper {
+    display: flex;
+    padding: 10px;
 }
-
-header {
-    padding-top: 50px;
-    .container {
-        display: flex;
-        justify-content: space-between;
-        a{
-            text-decoration: none;
-            color: black;
-        }
+li {
+    list-style: none;
+}
+.left {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    p{
+        background: rgb(88, 88, 88);
+        color: rgb(255, 255, 255);
     }
-}
-.content {
-    margin-top: 100px;
     .addBook {
         display: flex;
         flex-direction: column;
         max-width: 200px;
-        margin:  0 auto;
+        margin: 0 auto;
         .name {
             margin-top: 10px;
         }
@@ -37,7 +34,7 @@ header {
             cursor: pointer;
         }
         .writeBtn, .uploadBtn {
-            width: 80%;
+            width: 173px;
             margin-top: 10px;
             height: 30px;
             cursor: pointer;
@@ -49,4 +46,7 @@ header {
     .innerUpload {
         display: none;
     }
+}
+.right {
+    width: 100%;
 }
