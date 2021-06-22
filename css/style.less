@@ -11,12 +11,25 @@ li {
     list-style: none;
 }
 .left {
-    width: 400px;
+    width: 1000px;
     display: flex;
     flex-direction: column;
     p{
         background: rgb(88, 88, 88);
         color: rgb(255, 255, 255);
+    }
+    .booklist {
+        li {
+            background-color: gray;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            button {
+                cursor: pointer;
+                margin-left: 5px;
+                border-radius: 10px;
+            }
+        }
     }
     .addBook {
         display: flex;
