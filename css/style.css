@@ -18,16 +18,28 @@ li {
   background: #585858;
   color: #ffffff;
 }
-.left .booklist li {
+.left .booklist li,
+.left .thebestbook li {
+  cursor: pointer;
   background-color: gray;
   display: flex;
   justify-content: space-between;
   margin-bottom: 5px;
 }
-.left .booklist li button {
+.left .booklist li p,
+.left .thebestbook li p {
+  background: none;
+}
+.left .booklist li button,
+.left .thebestbook li button {
   cursor: pointer;
   margin-left: 5px;
   border-radius: 10px;
+}
+.left .bestbook {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
 }
 .left .addBook {
   display: flex;
@@ -61,4 +73,24 @@ li {
 }
 .right {
   width: 100%;
+  position: relative;
+}
+.right .edit_form {
+  display: none;
+  position: absolute;
+  top: 100px;
+  left: 25%;
+}
+.right .edit_form .edit_form_content {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+.right .edit_form .edit_form_content .edit_text {
+  margin-top: 10px;
+  height: 150px;
+}
+.right .edit_form .edit_form_content .EditBtn {
+  margin-top: 10px;
+  height: 25px;
 }

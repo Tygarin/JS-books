@@ -10,10 +10,9 @@
 <body>
     <div class="wrapper">
         <div class="left">
-                <div class="bestbook">
+                <div class="thebestbook">
                     <p>Мои любимые</p>
-                    <div class="bestbookInput">
-                        Сюда перетаскивать
+                    <div class="bestbook"id="bestBookZone">
                     </div>
                 </div>
                 <div class="booklist">
@@ -32,7 +31,7 @@
                     </div>
                     <form name="writeForm"  class="innerWrite">
                         <input type="text" class="name" placeholder="Введите название" id="writeInputLogin">
-                        <input type="text" class="text" placeholder="Введите текст" id="writeInputText">
+                        <textarea class="text" placeholder="Введите текст" id="writeInputText"></textarea>
                         <input type="button" class="writeBtn" id="writeFormBtn" value="Готово">
                     </form>
                     <form enctype="multipart/form-data" method="POST" name="uploadForm" class="innerUpload">
@@ -44,6 +43,13 @@
         </div>
         <div class="right">
             <div class="content" id="content"></div>
+            <div class="edit_form" id="edit_form">
+                <div class="edit_form_content">
+                    <input type="text" class="edit_name" placeholder="Измените название" id="EditInputLogin">
+                    <textarea class="edit_text" placeholder="Измените текст" id="EditInputText"></textarea>
+                    <input type="button" class="EditBtn" id="EditFormBtn" value="Изменить">
+                </div>
+            </div>
         </div>
     </div>
     <script src="js/main.js"></script>

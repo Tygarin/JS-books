@@ -30,25 +30,29 @@ if(localStorage.getItem('books')) {
 class Book {
     constructor(i) {
         let li = document.createElement("li");
+        let liName = document.createElement("p");
         let buttons = document.createElement("div");
         let read_button = document.createElement("button");
         let delete_button = document.createElement("button");
         let status_button = document.createElement("button");
         let edit_button = document.createElement("button");
 
+        liName.classList.add('liName')
         li.classList.add('li');
         read_button.classList.add('read_button');
         delete_button.classList.add('delete_button');
         status_button.classList.add('status_button');
         edit_button.classList.add('edit_button');
         
-        li.innerHTML = JSON.parse(localStorage.getItem("books"))[i].login;
+        liName.innerHTML = JSON.parse(localStorage.getItem("books"))[i].login;
         read_button.innerText = 'Читать'
         delete_button.innerText = 'Удалить'
         status_button.innerText = 'Статус'
         edit_button.innerText = 'Изменить'
+        li.draggable = 'true'
 
         booklist.appendChild(li);
+        li.appendChild(liName);
         li.appendChild(buttons);
         buttons.appendChild(read_button);
         buttons.appendChild(delete_button);
@@ -57,32 +61,83 @@ class Book {
 
         delete_button.onclick = () => {
             li.remove();
+            console.log(books[i]);
             books.splice(i, 1);
             localStorage.setItem('books', JSON.stringify(books));
         }
         status_button.onclick = () => {
-            if(li.style.background == 'green') {
-                li.style.background = 'gray';
-            } else {
-                li.style.background = 'green';
-            }
-            if(books[i].readed == false) {
-                books[i].readed = true
-            } else {
-                books[i].readed = false
-            }
+            books[i].readed == false ? books[i].readed = true : books[i].readed = false
+            books[i].readed == true ? li.style.background = 'green' : li.style.background = 'gray'
+            // if(books[i].readed == true) {
+            //     books.unshift(books[i]);
+            //     books.splice((i+1), 1);
+            // }
             localStorage.setItem('books', JSON.stringify(books));
         }
         read_button.onclick = () => {
             document.getElementById('content').innerText=books[i].text;
         }
+        edit_button.onclick = () => {
+            const edit_form = document.getElementById('edit_form');
+            const editLogin = document.getElementById('EditInputLogin');
+            const editText = document.getElementById('EditInputText');
+            const editModalBtn = document.getElementById('EditFormBtn');
+
+            edit_form.style.display = 'block';
+            editLogin.value = books[i].login;
+            editText.innerText = books[i].text;
+
+            editModalBtn.onclick = () => {
+                books[i].login = editLogin.value;
+                books[i].text = editText.value;
+                localStorage.setItem('books', JSON.stringify(books));
+                liName.innerText = books[i].login;
+                edit_form.style.display = 'none';
+                document.getElementById('content').innerText = books[i].text;
+            }
+        }
+
+        //grag and drop
+        const bestBookZone = document.getElementById('bestBookZone');
+        li.addEventListener('dragstart', (event) => {
+            event.target.classList.add('selected');
+            books[i].isfavourite = true
+        })
+        li.addEventListener('dragend', (event) => {
+            event.target.classList.remove('selected')
+        })
+        bestBookZone.ondragover = allowDrop;
+        bestBookZone.ondrop = drop;
+        
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+        
+        function drop(event) {
+            console.log(books[i]);
+            localStorage.setItem('books', JSON.stringify(books));
+            event.target.append(document.querySelector('.selected'));
+        }
+
+        if(books[i].isfavourite == true) {
+                bestBookZone.appendChild(li)
+        }
     }
 }
 
-if(localStorage.getItem("books")) {
-    for (i = 0; i < JSON.parse(localStorage.getItem("books")).length; i++) {
-        new Book(i);
+function render() {
+    if(localStorage.getItem("books")) {
+        for (i = 0; i < JSON.parse(localStorage.getItem("books")).length; i++) {
+            new Book(i);
+        }
     }
+}
+render()
+
+let li = document.querySelectorAll('.li');
+for(i = 0; i<li.length; i++) {
+    books[i].readed == true ? li[i].style.background = 'green' : li[i].style.background = 'gray'
+    localStorage.setItem('books', JSON.stringify(books));
 }
 
 uploadFormBtn.addEventListener('click', function() {
@@ -91,24 +146,26 @@ uploadFormBtn.addEventListener('click', function() {
     xhr.open('POST', 'https://apiinterns.osora.ru/')
     xhr.send(formData);
     xhr.onload = function() {
+        let answer = this.response;
         books.push({
             login:formData.get('login'),
-            text:JSON.parse(this.response).text,
+            text:JSON.parse(answer).text,
             readed: false
         })
         localStorage.setItem('books', JSON.stringify(books));
     }
-    setTimeout(()=> {
-        let Books = new Book(JSON.parse(localStorage.getItem("books")).length - 1);
-    }, 100)
+    let Books = new Book(JSON.parse(localStorage.getItem("books")).length - 1);
 })
+
 writeFormBtn.addEventListener('click', function() {
     books.push({
         login: document.getElementById('writeInputLogin').value,
         text: document.getElementById('writeInputText').value,
-        readed: false
+        readed: false,
+        isfavourite: false
     })
     console.log(document.getElementById('writeInputLogin').value);
     localStorage.setItem('books', JSON.stringify(books));
     let Books = new Book(JSON.parse(localStorage.getItem("books")).length - 1);
 })
+
