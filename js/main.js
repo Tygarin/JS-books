@@ -153,8 +153,8 @@ uploadFormBtn.addEventListener('click', function() {
             readed: false
         })
         localStorage.setItem('books', JSON.stringify(books));
+        let Books = new Book(JSON.parse(localStorage.getItem("books")).length - 1);
     }
-    let Books = new Book(JSON.parse(localStorage.getItem("books")).length - 1);
 })
 
 writeFormBtn.addEventListener('click', function() {
