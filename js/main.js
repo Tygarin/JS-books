@@ -85,7 +85,7 @@ class Book {
 
             edit_form.style.display = 'block';
             editLogin.value = books[i].login;
-            editText.innerText = books[i].text;
+            editText.innerHTML = books[i].text.split('\n').join('');
 
             editModalBtn.onclick = () => {
                 books[i].login = editLogin.value;
@@ -99,14 +99,21 @@ class Book {
 
         //grag and drop
         const bestBookZone = document.getElementById('bestBookZone');
+        const booklistZone = document.querySelector('.booklist')
         li.addEventListener('dragstart', (event) => {
             event.target.classList.add('selected');
-            books[i].isfavourite = true
         })
         li.addEventListener('dragend', (event) => {
-            event.target.classList.remove('selected')
+            event.target.classList.remove('selected');
+            if(li.parentElement == bestBookZone) {
+                books[i].isfavourite = true
+                console.log(books[i].isfavourite);
+            } else books[i].isfavourite = false
+            localStorage.setItem('books', JSON.stringify(books));
         })
         bestBookZone.ondragover = allowDrop;
+        booklistZone.ondragover = allowDrop;
+        booklistZone.ondrop = drop;
         bestBookZone.ondrop = drop;
         
         function allowDrop(event) {
@@ -114,14 +121,11 @@ class Book {
         }
         
         function drop(event) {
-            console.log(books[i]);
             localStorage.setItem('books', JSON.stringify(books));
             event.target.append(document.querySelector('.selected'));
+            console.log('drop');
         }
-
-        if(books[i].isfavourite == true) {
-                bestBookZone.appendChild(li)
-        }
+        books[i].isfavourite == true ? bestBookZone.appendChild(li) : booklistZone.appendChild(li)
     }
 }
 

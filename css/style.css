@@ -39,7 +39,7 @@ li {
 .left .bestbook {
   display: flex;
   flex-direction: column;
-  height: 100px;
+  min-height: 100px;
 }
 .left .addBook {
   display: flex;
@@ -93,4 +93,7 @@ li {
 .right .edit_form .edit_form_content .EditBtn {
   margin-top: 10px;
   height: 25px;
+}
+.booklist {
+  min-height: 100px;
 }
